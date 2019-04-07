@@ -90,16 +90,16 @@
       return {a: 'what'}
     },
     methods: {
-      handleSubmit(e) {
-        this.$emit('login', {username: 'zsddd', userid: '12345ss'});// TODO: 这里要有和服务器的通讯过程。将来userid应该查询后得知。
+      handleSubmit: function (e) {
+        // console.log(this);
         // e.preventDefault();
-        // this.form.validateFields((err, values) => {
-        //   if (!err) {
-            // console.log('Received values of form: ', values);
-            // this.$emit('login', {username: values.username, userid: '12345ss'});// TODO: 这里要有和服务器的通讯过程。将来userid应该查询后得知。
+        this.form.validateFields((err, values) => {
+          if (!err) {
+            console.log('Received values of form: ', values);
+            this.$emit('login', {username: values.username, userid: '12345ss'});// TODO: 这里要有和服务器的通讯过程。将来userid应该查询后得知。
             // this.experinment()
-          // }
-        // });
+          }
+        });
       }
     }
   };

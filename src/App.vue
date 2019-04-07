@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app" @login="login">
     <Login v-if="!isLogin"/>
-    <Main :username="username" :userid="userid" @login="login" v-if="isLogin"/>
+    <Main :username="username" :userid="userid"  v-if="isLogin"/>
   </div>
 </template>
 
@@ -21,10 +21,11 @@
     },
     methods: {
       login: function (values) {
-        console.log(values);
-        this.username = values.username;
-        this.userid = values.userid;
-        this.isLogin = true
+        // console.log(values);
+        // this.username = values.username;
+        // this.userid = values.userid;
+        // this.isLogin = true
+        alert(values)
       }
     }
   }
