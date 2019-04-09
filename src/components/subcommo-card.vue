@@ -1,9 +1,8 @@
 <template>
   <a-card class="show-commodity-card">
-    <img
-      alt="example"
-      src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-      slot="cover"
+    <b-img thumbnail
+           alt="example"
+           :src="src"
     />
     <p style="font-size: large;">{{name}}</p>
     <p style="line-height: 0.4">单价￥{{price}}50</p>
@@ -16,16 +15,17 @@
 </template>
 
 <script>
-  export default {
-    name: 'subcommo-card',
-    props: {
-      price: Number,
-      last: Number,
-      discount: Number,
-      status: String,
-      name: String
+    export default {
+        name: 'subcommo-card',
+        props: {
+            price: Number,
+            last: Number,
+            discount: Number,
+            status: String,
+            name: String,
+            src: String
+        }
     }
-  }
 </script>
 
 <style scoped>

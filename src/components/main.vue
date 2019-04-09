@@ -7,11 +7,11 @@
         凌遇卖家版
         <small style="font-size: large">{{username}} ({{userid}})</small>
         <a-menu
-          theme="dark"
-          mode="horizontal"
-          :defaultSelectedKeys="['1']"
-          :style="{ lineHeight: '64px' }"
-          style="float: right;"
+                theme="dark"
+                mode="horizontal"
+                :defaultSelectedKeys="['1']"
+                :style="{ lineHeight: '64px' }"
+                style="float: right;"
         >
           <a-menu-item key="1" @click="page_status='overview'">概览</a-menu-item><!-- overview -->
           <a-menu-item key="2" @click="page_status='background'">后台</a-menu-item><!-- background -->
@@ -23,8 +23,10 @@
         </a-menu>
       </a-layout-header>
       <a-layout-content>
-        <hello :name="username" sum=100 volumn=10 shopname="曹子帆de店" shopid="12df4sdff" v-if="page_status==='overview'"/>
-        <background v-if="page_status==='background'"/>
+        <hello :name="username" sum=100 volumn=10 shopname="曹子帆de店" shopid="12df4sdff"
+               @jump="function() {page_status_tobg='check';page_status='background'}"
+               v-if="page_status==='overview'"/>
+        <background :origion_page_status="page_status_tobg" v-if="page_status==='background'"/>
       </a-layout-content>
       <a-layout-footer>陕ICP备16001080-1<br/>
         西安凌遇光来网络科技服务部@2019
@@ -33,26 +35,28 @@
   </div>
 </template>
 <script>
-  import hello from './submain-hello'
-  import background from './submain-background'
+    import hello from './submain-hello'
+    import background from './submain-background'
 
-  export default {
-    name: 'main',
-    components: {hello, background},
-    comments: {hello},
-    props: {
-      username: String,
-      userid: String
-    },
-    data() {
-      return {page_status: 'overview'}
+    export default {
+        name: 'main',
+        components: {hello, background},
+        props: {
+            username: String,
+            userid: String
+        },
+        data() {
+            return {
+                page_status: 'overview',
+                page_status_tobg: 'commodity'
+            }
+        }
+        // methods: {
+        //   setUsername(name) {
+        //     this.username = name
+        //   }
+        // }
     }
-    // methods: {
-    //   setUsername(name) {
-    //     this.username = name
-    //   }
-    // }
-  }
 </script>
 <style>
   .main-profile-vue {

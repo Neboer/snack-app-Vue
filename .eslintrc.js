@@ -31,6 +31,7 @@ module.exports = {
     'no-new': 0,
     'no-unused-vars': 0,
     'object-curly-spacing': 0,
-    'quotes':0
+    'quotes':0,
+    'eol-last':0
   }
 };

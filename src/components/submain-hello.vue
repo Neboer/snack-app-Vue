@@ -4,8 +4,8 @@
       <h1>您好，{{name}}！</h1>
       <p>总销售额为{{sum}}元，总销量为{{volumn}}件</p>
       <p>
-<!--        <a class="btn btn-lg btn-primary" href="money.html" role="button">查看详情 &raquo;</a>-->
-        <a-button type="primary" size="large">查看详情>></a-button>
+        <!--        <a class="btn btn-lg btn-primary" href="money.html" role="button">查看详情 &raquo;</a>-->
+        <a-button type="primary" size="large" @click="$emit('jump')">查看详情>></a-button>
       </p>
     </div>
     <div class="jumbotron">
@@ -17,16 +17,16 @@
 </template>
 
 <script>
-  export default {
-    name: 'submain-hello',
-    props: {
-      'name': String,
-      'sum': Number,
-      'volumn': Number,
-      'shopname': String,
-      'shopid': String
+    export default {
+        name: 'submain-hello',
+        props: {
+            'name': String,
+            'sum': Number,
+            'volumn': Number,
+            'shopname': String,
+            'shopid': String
+        }
     }
-  }
 </script>
 
 <style scoped>
