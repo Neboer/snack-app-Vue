@@ -6,7 +6,7 @@
     </a-menu>
     <p>
       <a-input-search placeholder="input search text" @search="onSearch" enterButton size="large"
-                      style="width: auto; text-align: left"></a-input-search>
+                      style="width: auto; text-align: left"/>
     </p>
     <card v-for="(commodity,key) in productlist" :name="commodity.name" :price="commodity.price"
     :last="commodity.last" :discount="commodity.discount" :src="commodity.src" :key="key"/>
