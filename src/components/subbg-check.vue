@@ -2,7 +2,7 @@
   <div class="jumbotron">
     <h1>总收入</h1>
     <p>{{totalmoney}}元</p>
-    <a-button @click="towithdraw">提现</a-button>
+    <a-button>提现</a-button>
   </div>
 </template>
 

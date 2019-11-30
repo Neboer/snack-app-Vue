@@ -21,7 +21,6 @@
         },
         methods: {
             login: function (values) {
-                console.log(values);
                 this.username = values.username;
                 this.userid = values.userid;
                 this.isLogin = true

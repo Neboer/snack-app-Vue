@@ -20,11 +20,11 @@
     export default {
         name: 'submain-hello',
         props: {
-            'name': String,
-            'sum': Number,
-            'volumn': Number,
-            'shopname': String,
-            'shopid': String
+            name: String,
+            sum: Number,
+            volumn: Number,
+            shopname: String,
+            shopid: String
         }
     }
 </script>

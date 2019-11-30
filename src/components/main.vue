@@ -23,7 +23,7 @@
         </a-menu>
       </a-layout-header>
       <a-layout-content>
-        <hello :name="username" sum=100 volumn=10 shopname="曹子帆de店" shopid="12df4sdff"
+        <hello :name="username" :sum=100 :volumn=10 shopname="曹子帆de店" shopid="12df4sdff"
                @jump="function() {page_status_tobg='check';page_status='background'}"
                v-if="page_status==='overview'"/>
         <background :origion_page_status="page_status_tobg" v-if="page_status==='background'"/>
