@@ -19,7 +19,24 @@
 	"address":"东北大学南门",
 	"src":"http://myshop-1251745829.cos.ap-chengdu.myqcloud.com/1550422194%281%29.jpg",
 	"shopid":2147483647,
-	"sum":0,
+	"sum":5,
+	"notification": [
+		{
+			"title": "第一条通知",
+			"body": "需要更新信息",
+			"time":"2019-11-30T10:07:34.471Z"
+		},
+		{
+			"title": "第二条通知",
+			"body": "注意要上班呀！",
+			"time":"2019-11-29T10:05:34.471Z"
+		},
+		{
+			"title": "第三条通知",
+			"body": "需要更新信息",
+			"time":"2019-11-28T09:07:34.471Z"
+		}
+	],
 	"productlist":[
 		{
 			"last":10,

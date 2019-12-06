@@ -15,8 +15,8 @@
                 <span>状态:{{status}}</span>
             </div>
             <a-button-group class="bottom-buttons">
-                <a-button type="primary" size="large" class="fill-line-button">修改</a-button>
-                <a-button type="danger" size="large" class="fill-line-button">删除</a-button>
+                <a-button type="primary" class="fill-line-button" icon="edit">修改</a-button>
+                <a-button type="danger" class="fill-line-button" icon="delete">删除</a-button>
             </a-button-group>
         </div>
 
