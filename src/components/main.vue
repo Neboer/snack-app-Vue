@@ -1,38 +1,39 @@
 <template>
-  <div id="main-profile-vue" class="main-profile-vue">
-    <a-layout>
-      <a-layout-header style="text-align: left;
+    <div id="main-profile-vue" class="main-profile-vue">
+        <a-layout>
+            <a-layout-header style="text-align: left;
         color: white;font-size: xx-large">
-        <img src="../assets/logo-sm.png" alt="logo"/>
-        凌遇卖家版
-        <small style="font-size: large">{{username}} ({{userid}})</small>
-        <a-menu
-                theme="dark"
-                mode="horizontal"
-                :defaultSelectedKeys="['1']"
-                :style="{ lineHeight: '64px' }"
-                style="float: right;"
-        >
-          <a-menu-item key="1" @click="page_status='overview'">概览</a-menu-item><!-- overview -->
-          <a-menu-item key="2" @click="page_status='background'">后台</a-menu-item><!-- background -->
-          <a-sub-menu>
-            <span slot="title" class="submenu-title-wrapper">我的</span>
-            <a-menu-item key="setting:1">修改密码</a-menu-item>
-            <a-menu-item key="setting:2">注销</a-menu-item>
-          </a-sub-menu>
-        </a-menu>
-      </a-layout-header>
-      <a-layout-content>
-        <hello :name="username" :sum=100 :volumn=10 shopname="曹子帆de店" shopid="12df4sdff"
-               @jump="function() {page_status_tobg='check';page_status='background'}"
-               v-if="page_status==='overview'"/>
-        <background :origion_page_status="page_status_tobg" v-if="page_status==='background'"/>
-      </a-layout-content>
-      <a-layout-footer>陕ICP备16001080-1<br/>
-        西安凌遇光来网络科技服务部@2019
-      </a-layout-footer>
-    </a-layout>
-  </div>
+                <img src="../assets/logo-sm.png" alt="logo"/>
+                凌遇卖家版
+                <small style="font-size: large">{{username}} ({{userid}})</small>
+                <a-menu
+                        theme="dark"
+                        mode="horizontal"
+                        :defaultSelectedKeys="['1']"
+                        :style="{ lineHeight: '64px' }"
+                        style="float: right;"
+                >
+                    <a-menu-item key="1" @click="page_status='overview'">概览</a-menu-item><!-- overview -->
+                    <a-menu-item key="2" @click="page_status='background'">后台</a-menu-item><!-- background -->
+                    <a-sub-menu>
+                        <span slot="title" class="submenu-title-wrapper">我的</span>
+                        <a-menu-item key="setting:1">修改密码</a-menu-item>
+                        <a-menu-item key="setting:2">注销</a-menu-item>
+                    </a-sub-menu>
+                </a-menu>
+            </a-layout-header>
+            <a-layout-content>
+                <hello :name="username" :sum=100 :volumn=10 shopname="曹子帆de店" shopid="12df4sdff"
+                       @jump="function() {page_status_tobg='check';page_status='background'}"
+                       v-if="page_status==='overview'"/>
+                <background :origion_page_status="page_status_tobg" :message_count="message_count"
+                            v-if="page_status==='background'"/>
+            </a-layout-content>
+            <a-layout-footer>陕ICP备16001080-1<br/>
+                西安凌遇光来网络科技服务部@2019
+            </a-layout-footer>
+        </a-layout>
+    </div>
 </template>
 <script>
     import hello from './submain-hello'
@@ -43,13 +44,21 @@
         components: {hello, background},
         props: {
             username: String,
-            userid: String
+            userid: Number
         },
         data() {
             return {
                 page_status: 'overview',
-                page_status_tobg: 'commodity'
+                page_status_tobg: 'commodity',
+                message_count: 0
             }
+        },
+        mounted() {
+            this.$message.loading('loading',0);
+            this.axios.get('/api/messages/count').then(res => {
+                this.message_count = res.data.count;
+                this.$message.destroy();
+            })
         }
         // methods: {
         //   setUsername(name) {
@@ -59,11 +68,11 @@
     }
 </script>
 <style>
-  .main-profile-vue {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-  }
+    .main-profile-vue {
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        color: #2c3e50;
+    }
 </style>

@@ -42,7 +42,7 @@
           'remember',
           {
             valuePropName: 'checked',
-            initialValue: true,
+            initialValue: true
           }
         ]"
         >
@@ -86,7 +86,7 @@
                 this.form.validateFields((err, values) => {
                     if (!err) {
                         // console.log('Received values of form: ', values);
-                        this.$emit('login', {username: values.username, userid: '12345ss'});// TODO: 这里要有和服务器的通讯过程。将来userid应该查询后得知。
+                        this.$emit('login', {username: values.username, password: values.password});
                         // this.experinment()
                     }
                 });
