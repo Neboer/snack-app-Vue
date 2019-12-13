@@ -26,8 +26,7 @@
                 <hello :name="username" :sum=100 :volumn=10 shopname="曹子帆de店" shopid="12df4sdff"
                        @jump="function() {page_status_tobg='check';page_status='background'}"
                        v-if="page_status==='overview'"/>
-                <background :origion_page_status="page_status_tobg" :message_count="message_count"
-                            v-if="page_status==='background'"/>
+                <background :origion_page_status="page_status_tobg" v-if="page_status==='background'"/>
             </a-layout-content>
             <a-layout-footer>陕ICP备16001080-1<br/>
                 西安凌遇光来网络科技服务部@2019
@@ -49,16 +48,8 @@
         data() {
             return {
                 page_status: 'overview',
-                page_status_tobg: 'commodity',
-                message_count: 0
+                page_status_tobg: 'commodity'
             }
-        },
-        mounted() {
-            this.$message.loading('loading',0);
-            this.axios.get('/api/messages/count').then(res => {
-                this.message_count = res.data.count;
-                this.$message.destroy();
-            })
         }
         // methods: {
         //   setUsername(name) {

@@ -1,22 +1,17 @@
 <template>
     <a-card class="show-commodity-card">
         <b-img thumbnail
-               :src="src"
+               :src="pictureSource"
                class="picture"
         />
         <h5>{{name}}</h5>
+        <img src="../assets/cutline.png" alt="cut line" class="cut_line"/>
         <div class="contenter">
-                    <span class="price">
-                  <span>¥</span><strong>{{price}}</strong>
-                </span>
-            <span style="float: right;margin-top: 5px">库存{{last}}60</span>
-            <div>
-                <span>折扣:{{discount}}</span>
-                <span>状态:{{status}}</span>
-            </div>
+            <span class="price"><span>¥</span><strong>{{price.toFixed(2)}}</strong></span>
+            <span style="float: right;margin-top: 3px; margin-right: 24px">库存{{storage}}60</span>
             <a-button-group class="bottom-buttons">
                 <a-button type="primary" class="fill-line-button" icon="edit">修改</a-button>
-                <a-button type="danger" class="fill-line-button" icon="delete">删除</a-button>
+                <a-button type="danger" class="fill-line-button" icon="delete" @click="clickDeleteButton">删除</a-button>
             </a-button-group>
         </div>
 
@@ -28,11 +23,32 @@
         name: 'subcommo-card',
         props: {
             price: Number,
-            last: Number,
-            discount: Number,
-            status: String,
+            storage: Number,
             name: String,
-            src: String
+            pictureSource: String,
+            commodityId: Number
+        },
+        methods: {
+            updateSelfCommodity(name, price, storage, pictureSource) {
+                return this.axios.post('/api/commodities/update/' + this.commodityId.toString(),
+                    {name, price, storage, pictureSource})
+            },
+            deleteSelfCommodity() {
+                return this.axios.get('/api/commodities/delete/' + this.commodityId.toString())
+            },
+
+            clickDeleteButton() {
+                this.$confirm({
+                    title: '确认删除此商品？',
+                    content: this.name,
+                    okText: '确认',
+                    okType: 'danger',
+                    cancelText: '取消',
+                    onOk() {
+                        this.deleteSelfCommodity()
+                    }
+                });
+            }
         }
     }
 </script>
@@ -63,10 +79,17 @@
         max-height: 150px;
     }
 
-    .contenter{
+    .cut_line {
+        position: absolute;
+        max-width: 150px;
+        bottom: 100px;
+    }
+
+    .contenter {
         position: absolute;
         bottom: 20px;
     }
+
     .ant-card-body {
         padding: 0;
     }

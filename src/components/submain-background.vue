@@ -7,7 +7,7 @@
                 <a-menu-item key="3" @click="bg_page_status='check'">结算中心</a-menu-item>
                 <a-menu-item key="4" @click="bg_page_status='stuff'">人员管理</a-menu-item>
                 <a-menu-item key="5" @click="bg_page_status='message'">消息管理
-                    <a-badge :count="message_count" style="float: right"/>
+                    <a-badge :count="messageCount" style="float: right"/>
                 </a-menu-item>
             </a-menu>
         </a-layout-sider>
@@ -16,7 +16,7 @@
             <order style="padding: 20px;width: auto;text-align: left" v-if="bg_page_status==='order'"/>
             <check :totalmoney="0" v-if="bg_page_status==='check'"/>
             <stuff v-if="bg_page_status==='stuff'"/>
-            <message v-if="bg_page_status==='message'"/>
+            <message v-if="bg_page_status==='message'" @updateCounts="getMessageCounts"/>
         </a-layout-content>
     </a-layout>
 </template>
@@ -31,11 +31,24 @@
     export default {
         name: 'submain-background.vue',
         components: {commodity, order, check, stuff, message},
-        props: {origion_page_status: String, message_count: Number},
+        props: {origion_page_status: String},
         data() {
             return {
-                bg_page_status: this.origion_page_status
+                bg_page_status: this.origion_page_status,
+                messageCount: 0
             }
+        },
+        methods: {
+            getMessageCounts: function () {
+                this.$message.loading('loading',0);
+                this.axios.get('/api/messages/count').then(res => {
+                    this.messageCount = res.data.count;
+                    this.$message.destroy();
+                })
+            }
+        },
+        mounted() {
+            this.getMessageCounts();
         }
     }
 </script>
