@@ -38,6 +38,7 @@ module.exports = {
         'padded-blocks': 'off',
         'comma-dangle': 'off',
         'comma-spacing': 'off',
-        'no-trailing-spaces': 'off'
+        'no-trailing-spaces': 'off',
+        'no-irregular-whitespace': "off"
     }
 };

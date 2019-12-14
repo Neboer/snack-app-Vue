@@ -1,24 +1,27 @@
 <template>
-    <a-card class="show-commodity-card">
-        <b-img thumbnail
-               :src="pictureSource"
-               class="picture"
-        />
-        <h5>{{name}}</h5>
-        <img src="../assets/cutline.png" alt="cut line" class="cut_line"/>
-        <div class="contenter">
-            <span class="price"><span>¥</span><strong>{{price.toFixed(2)}}</strong></span>
-            <span style="float: right;margin-top: 3px; margin-right: 24px">库存{{storage}}60</span>
-            <a-button-group class="bottom-buttons">
-                <a-button type="primary" class="fill-line-button" icon="edit">修改</a-button>
-                <a-button type="danger" class="fill-line-button" icon="delete" @click="clickDeleteButton">删除</a-button>
-            </a-button-group>
-        </div>
-
-    </a-card>
+    <div>
+        <a-card class="show-commodity-card">
+            <b-img thumbnail
+                   :src="pictureSource"
+                   class="picture"
+            />
+            <h5>{{name}}</h5>
+            <img src="../assets/cutline.png" alt="cut line" class="cut_line"/>
+            <div class="contenter">
+                <span class="price"><span>¥</span><strong>{{price.toFixed(2)}}</strong></span>
+                <span style="float: right;margin-top: 3px; margin-right: 24px">库存{{storage}}</span>
+                <a-button-group class="bottom-buttons">
+                    <a-button type="primary" class="fill-line-button" icon="edit" @click="clickEditButton">修改</a-button>
+                    <a-button type="danger" class="fill-line-button" icon="delete" @click="clickDeleteButton">删除
+                    </a-button>
+                </a-button-group>
+            </div>
+        </a-card>
+    </div>
 </template>
 
 <script>
+
     export default {
         name: 'subcommo-card',
         props: {
@@ -27,6 +30,11 @@
             name: String,
             pictureSource: String,
             commodityId: Number
+        },
+        data() {
+            return {
+                // editInfoBox: true
+            }
         },
         methods: {
             updateSelfCommodity(name, price, storage, pictureSource) {
@@ -38,6 +46,7 @@
             },
 
             clickDeleteButton() {
+                const vueRoot = this;
                 this.$confirm({
                     title: '确认删除此商品？',
                     content: this.name,
@@ -45,9 +54,13 @@
                     okType: 'danger',
                     cancelText: '取消',
                     onOk() {
-                        this.deleteSelfCommodity()
+                        // console.log(this);
+                        vueRoot.deleteSelfCommodity().then(() => vueRoot.$emit("refresh"))
                     }
                 });
+            },
+            clickEditButton() {
+                this.$emit('edit', this.commodityId, this.name, this.price, this.storage, this.pictureSource);
             }
         }
     }
